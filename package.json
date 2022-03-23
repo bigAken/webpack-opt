@@ -18,6 +18,8 @@
   "homepage": "https://github.com/bigAken/webpack-opt#readme",
   "dependencies": {
     "css-loader": "^6.7.1",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
     "style-loader": "^3.3.1",
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2"

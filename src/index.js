@@ -1,3 +1,3 @@
-import css from "./test.css";
-console.log("css", css);
+import "./test.css";
+import "./test2.less";
 console.log(11111);
