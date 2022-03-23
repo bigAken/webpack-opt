@@ -1,3 +1,3 @@
 # webpack 配置以及优化
 
-![webpack](./webpack1-2.jpg)
+![webpack](./webpack1.jpg)
