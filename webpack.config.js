@@ -1,3 +1,4 @@
+const { dirname } = require("path");
 const path = require("path");
 
 module.exports = {
@@ -5,6 +6,7 @@ module.exports = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "build"),
+    assetModuleFilename: "static/[hash][ext][query]",
   },
   module: {
     rules: [
@@ -13,6 +15,7 @@ module.exports = {
         // 写法一
         use: [
           { loader: "style-loader" },
+
           {
             loader: "css-loader",
             options: {
@@ -20,7 +23,7 @@ module.exports = {
               importLoaders: 1,
             },
           },
-          "postcss-loader",
+          { loader: "postcss-loader" },
         ],
         // 写法二
         // loader: 'style-loader',
@@ -40,6 +43,30 @@ module.exports = {
           "postcss-loader",
           "less-loader",
         ],
+      },
+      {
+        test: /\.(png|jpg|gif|png|jpeg|svg)$/i,
+        // webpack 4.x url-loader file-loader
+        // use: [
+        //   {
+        //     loader: "url-loader",
+        //     options: {
+        //       limit: 8192,
+        //     },
+        //   },
+        // ],
+
+        // webpack 5.x asset module
+        type: "asset",
+        dependency: { not: ["url"] },
+        parser: {
+          dataUrlCondition: {
+            maxSize: 4 * 1024, // 4kb
+          },
+        },
+        generator: {
+          filename: "image/[name]-[contenthash:6][ext]",
+        },
       },
     ],
   },
