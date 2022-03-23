@@ -87,6 +87,7 @@ module.exports = {
       template: "./public/index.html",
       favicon: "./public/favicon.ico",
     }),
+    // define global variable
     new DefinePlugin({
       BASE_URL: "'./'",
     }),
