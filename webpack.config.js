@@ -11,7 +11,17 @@ module.exports = {
       {
         test: /\.css$/,
         // 写法一
-        use: [{ loader: "style-loader" }, { loader: "css-loader" }],
+        use: [
+          { loader: "style-loader" },
+          {
+            loader: "css-loader",
+            options: {
+              // 允许你配置在 css-loader 之前有多少 loader 应用于 @import 资源
+              importLoaders: 1,
+            },
+          },
+          "postcss-loader",
+        ],
         // 写法二
         // loader: 'style-loader',
         // 写法三
@@ -20,9 +30,14 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          // compiles Less to CSS
-          "style-loader",
-          "css-loader",
+          { loader: "style-loader" },
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 2,
+            },
+          },
+          "postcss-loader",
           "less-loader",
         ],
       },
