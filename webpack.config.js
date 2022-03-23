@@ -1,6 +1,7 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { DefinePlugin } = require("webpack");
 
 module.exports = {
   entry: "./src/index.js",
@@ -80,11 +81,14 @@ module.exports = {
   plugins: [
     // clean build dir
     new CleanWebpackPlugin(),
-    // index.html template
+    // index.html template in prodcut mode will compress html  template
     new HtmlWebpackPlugin({
       title: "webpack",
       template: "./public/index.html",
       favicon: "./public/favicon.ico",
+    }),
+    new DefinePlugin({
+      BASE_URL: "'./'",
     }),
   ],
 };
