@@ -58,14 +58,20 @@ module.exports = {
 
         // webpack 5.x asset module
         type: "asset",
-        dependency: { not: ["url"] },
         parser: {
           dataUrlCondition: {
-            maxSize: 4 * 1024, // 4kb
+            maxSize: 8 * 1024, // 4kb
           },
         },
         generator: {
           filename: "image/[name]-[contenthash:6][ext]",
+        },
+      },
+      {
+        test: /\.ttf|eot|gif|woff2?$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "font/[name]-[contenthash:6][ext]",
         },
       },
     ],
