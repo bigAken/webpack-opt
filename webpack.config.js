@@ -1,4 +1,6 @@
 const path = require("path");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -11,7 +13,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        // 写法一
+        // usage 1
         use: [
           { loader: "style-loader" },
 
@@ -24,9 +26,9 @@ module.exports = {
           },
           { loader: "postcss-loader" },
         ],
-        // 写法二
+        // usage 2
         // loader: 'style-loader',
-        // 写法三
+        // usage 3
         // loader: ["style-loader", "css-loader"]
       },
       {
@@ -75,5 +77,13 @@ module.exports = {
       },
     ],
   },
-  plugin: [],
+  plugins: [
+    // clean build dir
+    new CleanWebpackPlugin(),
+    // index.html template
+    new HtmlWebpackPlugin({
+      title: "webpack",
+      template: "./public/index.html",
+    }),
+  ],
 };
