@@ -18,6 +18,6 @@ document.body.append(divEL);
 
 const test = () => console.log(1111);
 // polyfill
-const tempArr = [1, undefine, null, false, 0, 2, 3, 1, 2, 2, 3];
+const tempArr = [1, undefined, null, false, 0, 2, 3, 1, 2, 2, 3];
 const filter = tempArr.filter(Boolean);
 console.log("filter", filter);
