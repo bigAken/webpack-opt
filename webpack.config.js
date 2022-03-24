@@ -13,6 +13,7 @@ module.exports = {
   },
   output: {
     filename: "[name].bundle.js",
+    // build file output dir
     path: path.resolve(__dirname, "build"),
     assetModuleFilename: "static/[hash][ext][query]",
   },
