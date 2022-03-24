@@ -8,21 +8,23 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 module.exports = {
   mode: "development",
   entry: {
-    // "index.tsx": "./src/index.tsx",
-    "index.js": "./src/index.tsx",
+    index: "./src/index.tsx",
   },
   output: {
     filename: "[name].bundle.js",
-    // build file output dir
+    // build file output dir ,The output directory as an absolute path.
     path: path.resolve(__dirname, "build"),
     assetModuleFilename: "static/[hash][ext][query]",
+    // <script defer src="publicPath+'/index.bundle.js'"></script>
+    publicPath: "/",
   },
   // development mode recommand source-map or cheap-module-source-map
   // product mode recommand false
   devtool: "source-map",
   devServer: {
-    static: "./dist",
     hot: false,
+    // devServer Enable gzip compression for everything served
+    compress: true,
   },
   module: {
     rules: [
@@ -115,7 +117,13 @@ module.exports = {
     // html HMR
     new webpack.HotModuleReplacementPlugin(),
   ],
+  // These options change how modules are resolved
   resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      asset: path.resolve(__dirname, "./src/asset"),
+    },
+    // Attempt to resolve these extensions in order
     extensions: [".js", ".json", ".tsx", "ts"],
   },
 };
