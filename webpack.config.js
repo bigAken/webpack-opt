@@ -2,16 +2,14 @@ const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { DefinePlugin } = require("webpack");
+const webpack = require("webpack");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  // entry: "./src/index.js",
-  // entry: "./src/testJsx.js",
   entry: {
-    "index.ts": "./src/index.tsx",
-    "index.js": "/src/index.js",
-    "index.jsx": "/src/index.jsx",
-    "testJsx.js": "./src/testJsx.js",
+    // "index.tsx": "./src/index.tsx",
+    "index.js": "./src/index.tsx",
   },
   output: {
     filename: "[name].bundle.js",
@@ -21,6 +19,10 @@ module.exports = {
   // development mode recommand source-map or cheap-module-source-map
   // product mode recommand false
   devtool: "source-map",
+  devServer: {
+    static: "./dist",
+    hot: false,
+  },
   module: {
     rules: [
       {
@@ -107,5 +109,12 @@ module.exports = {
     new DefinePlugin({
       BASE_URL: "'./'",
     }),
+    // react HMR
+    new ReactRefreshWebpackPlugin(),
+    // html HMR
+    new webpack.HotModuleReplacementPlugin(),
   ],
+  resolve: {
+    extensions: [".js", ".json", ".tsx", "ts"],
+  },
 };

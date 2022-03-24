@@ -24,5 +24,8 @@ module.exports = {
     //     corejs: "3",
     //   },
     // ],
+
+    // react HMR plugin
+    require.resolve('react-refresh/babel')
   ],
 };
