@@ -5,7 +5,8 @@ const { DefinePlugin } = require("webpack");
 
 module.exports = {
   mode: "development",
-  entry: "./src/index.js",
+  // entry: "./src/index.js",
+  entry: "./src/testJsx.js",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "build"),
@@ -17,13 +18,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: "babel-loader",
-          },
-        ],
+        use: ["babel-loader"],
       },
       {
         test: /\.css$/,

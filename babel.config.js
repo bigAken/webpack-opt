@@ -11,6 +11,7 @@ module.exports = {
         corejs: "3.21",
       },
     ],
+    ["@babel/preset-react"],
   ],
   plugins: [
     // polyfill usage 2
