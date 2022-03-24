@@ -4,12 +4,16 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { DefinePlugin } = require("webpack");
 
 module.exports = {
+  mode: "development",
   entry: "./src/index.js",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "build"),
     assetModuleFilename: "static/[hash][ext][query]",
   },
+  // development mode recommand source-map or cheap-module-source-map
+  // product mode recommand false
+  devtool: "source-map",
   module: {
     rules: [
       {
