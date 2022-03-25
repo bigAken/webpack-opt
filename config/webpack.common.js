@@ -11,10 +11,11 @@ const common = {
     index: "./src/index.tsx",
   },
   output: {
-    filename: "[name].bundle.js",
+    filename: "[name].[hash:6].bundle.js",
     // build file output dir ,The output directory as an absolute path.
     path: pathResolve("./build"),
     assetModuleFilename: "static/[hash][ext][query]",
+    chunkFilename: "[name].[hash:6].chunk.js",
     // <script defer src="publicPath+'/index.bundle.js'"></script>
     // publicPath: "./",
   },
@@ -36,6 +37,11 @@ const common = {
             options: {
               // 允许你配置在 css-loader 之前有多少 loader 应用于 @import 资源
               importLoaders: 1,
+              esModule: true,
+              modules: {
+                namedExport: true,
+                localIdentName: "[name]",
+              },
             },
           },
           { loader: "postcss-loader" },

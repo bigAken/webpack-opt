@@ -1,14 +1,18 @@
 import React from "react";
 import img from "@asset/image/1.png";
-import  './index.css'
+import "./index.css";
+import lodash from "lodash";
+
+
 
 interface AppProps {}
 interface AppStates {}
 class App extends React.Component<AppProps, AppStates> {
   state = {
-    message: "hello world",
+    message: "hello world111",
   };
   render() {
+    console.log(lodash.cloneDeep({ name: "21" }));
     return (
       <div>
         <h2 className="test">9999</h2>
@@ -19,3 +23,4 @@ class App extends React.Component<AppProps, AppStates> {
   }
 }
 export default App;
+
