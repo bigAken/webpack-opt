@@ -60,7 +60,12 @@ const common = {
       {
         test: /\.less$/,
         use: [
-          { loader: "style-loader" },
+          {
+            loader:
+              process.env.NODE_ENV === "production"
+                ? MiniCssExtractPlugin.loader
+                : "style-loader",
+          },
           {
             loader: "css-loader",
             options: {

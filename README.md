@@ -61,6 +61,10 @@ DLL 全程是动态链接库（Dynamic Link Library），是为软件在 Windows
 
 css-minimizer-webpack-plugin 插件使用 cssnano 优化和压缩 CSS
 
+## 作用域提升 scope hoisting
+
+production 模式下默认开启
+
 ## tree shaking
 
 ## 概览

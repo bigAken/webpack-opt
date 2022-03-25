@@ -1,5 +1,5 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserWebpackPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
@@ -23,7 +23,7 @@ module.exports = {
     minimize: true,
     minimizer: [
       // js 压缩
-      new TerserPlugin({
+      new TerserWebpackPlugin({
         test: /\.js(\?.*)?$/i,
         terserOptions: {
           compress: true,
