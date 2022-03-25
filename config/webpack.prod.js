@@ -18,8 +18,16 @@ module.exports = {
     // named: 使用包所在目录作为name(在开发环境推荐)
     // deterministic: 生成id, 针对相同文件生成的id是不变
     chunkIds: "named",
+    // [ˈmɪnɪmaɪz]
     minimize: true,
-    minimizer: [new TerserPlugin()],
+    minimizer: [
+      new TerserPlugin({
+        test: /\.js(\?.*)?$/i,
+        terserOptions: {
+          compress: true,
+        },
+      }),
+    ],
 
     splitChunks: {
       // 自动匹配all， 异步引入async， 同步引入nitial
