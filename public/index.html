@@ -4,11 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <% if(process.env.NODE_ENV === 'production'){ %>
+    <script
+      defer="defer"
+      src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.20/lodash.js"
+    ></script>
+    <% } %>
   </head>
   <body>
-    <div id="app">11</div>
+    <div id="app"><%= htmlWebpackPlugin.options.env %></div>
     <div id="app2">222</div>
     <div id="app3">333</div>
   </body>

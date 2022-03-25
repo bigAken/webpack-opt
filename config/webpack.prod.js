@@ -6,8 +6,10 @@ module.exports = {
   plugins: [
     // clean build dir
     new CleanWebpackPlugin(),
-
   ],
+  externals: {
+    lodash: "_",
+  },
   optimization: {
     // named: 使用包所在目录作为name(在开发环境推荐)
     // deterministic: 生成id, 针对相同文件生成的id是不变

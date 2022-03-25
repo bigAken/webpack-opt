@@ -101,6 +101,7 @@ const common = {
     // index.html template in prodcut mode will compress html  template
     new HtmlWebpackPlugin({
       title: "webpack",
+      env: process.env.NODE_ENV,
       template: pathResolve("./public/index.html"),
       favicon: pathResolve("./public/favicon.ico"),
     }),
