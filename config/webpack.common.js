@@ -4,6 +4,8 @@ const { DefinePlugin } = require("webpack");
 const { merge } = require("webpack-merge");
 const devConfig = require("./webpack.dev.js");
 const prodConfig = require("./webpack.prod.js");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 const pathResolve = require("./paths");
 
 const common = {
@@ -11,11 +13,11 @@ const common = {
     index: "./src/index.tsx",
   },
   output: {
-    filename: "[name].[hash:6].bundle.js",
+    filename: "js/[name].[contenthash:6].bundle.js",
     // build file output dir ,The output directory as an absolute path.
     path: pathResolve("./build"),
-    assetModuleFilename: "static/[hash][ext][query]",
-    chunkFilename: "[name].[hash:6].chunk.js",
+    assetModuleFilename: "static/[contenthash][ext][query]",
+    chunkFilename: "js/[name].[contenthash:6].chunk.js",
     // <script defer src="publicPath+'/index.bundle.js'"></script>
     // publicPath: "./",
   },
@@ -30,8 +32,12 @@ const common = {
         test: /\.css$/,
         // usage 1
         use: [
-          { loader: "style-loader" },
-
+          {
+            loader:
+              process.env.NODE_ENV === "production"
+                ? MiniCssExtractPlugin.loader
+                : "style-loader",
+          },
           {
             loader: "css-loader",
             options: {

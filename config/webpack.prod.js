@@ -1,11 +1,15 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "production",
   plugins: [
     // clean build dir
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "css/[name]-[contenthash:6].css",
+    }),
   ],
   externals: {
     lodash: "_",
@@ -28,13 +32,9 @@ module.exports = {
       maxInitialRequests: 30,
       enforceSizeThreshold: 50000,
       cacheGroups: {
-        lodash: {
-          test: /[\\/]node_modules[\\/]lodash[\\/]/,
-          priority: 10,
-          reuseExistingChunk: true,
-        },
         "react-dom": {
           test: /[\\/]node_modules[\\/]react-dom[\\/]/,
+          filename: "js/[name].[contenthash:6].chunk.js",
           priority: 0,
           reuseExistingChunk: true,
         },
