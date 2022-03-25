@@ -1,3 +1,5 @@
+import "./test";
+
 document.getElementById("app2")?.addEventListener("click", () => {
   console.log("www");
   // 魔法注释（magic comments）
@@ -10,6 +12,3 @@ document.getElementById("app2")?.addEventListener("click", () => {
     console.log(11111);
   });
 });
-import _ from "lodash";
-console.log(_.cloneDeep({ name: "21" }));
-

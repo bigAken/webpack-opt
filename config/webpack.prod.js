@@ -16,6 +16,8 @@ module.exports = {
     lodash: "_",
   },
   optimization: {
+    // tree shaking production模式下默认开启
+    usedExports: true,
     // named: 使用包所在目录作为name(在开发环境推荐)
     // deterministic: 生成id, 针对相同文件生成的id是不变
     chunkIds: "named",
@@ -57,6 +59,7 @@ module.exports = {
         },
       },
     },
+    // 各个模块之间的引用和加载的逻辑相关的代码
     runtimeChunk: {
       name: function (entrypoint) {
         return `inlineSource-${entrypoint.name}`;

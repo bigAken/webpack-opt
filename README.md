@@ -2,7 +2,7 @@
 
 ## 区分生产环境与开发环境
 
-## js 分包
+## js 分包 splitChunks
 
 1. 入口分包 entry dependOn
 2. [splitChunks](https://webpack.docschina.org/plugins/split-chunks-plugin/)
@@ -23,7 +23,7 @@ import(
 
 ## optimezation.runtimeChunk
 
-runtimeChunk:各个模块之间的引用和加载的逻辑相关的代码默认内嵌入每个 entry 入口
+runtimeChunk:`各个模块之间的引用和加载的逻辑相关的代码`默认内嵌入每个 entry 入口
 如果抽离出来的 runtimeChunk 体积小可以可以内嵌附带在 html 中加载出来
 
 ## externals CDN
@@ -66,6 +66,12 @@ css-minimizer-webpack-plugin 插件使用 cssnano 优化和压缩 CSS
 production 模式下默认开启
 
 ## tree shaking
+
+1. usedExports production 模式下默认开启
+2. sideEffects package.json 里面配置
+   如果将 sideEffects 设置为 false，就是告知 webpack 可以安全的删除未用到的代码
+   > 副作用比如在某个模块里面给 window 赋值了`window.abc = 'abc'`，但是这个模块的代码又被 treeshaking 删除了，在别的模块调用`window.abc`则会报`undefined`，所以这个模块有副作用
+3. css tree-shaking 可以在 rule 里面配置 sideEffects:true
 
 ## 概览
 

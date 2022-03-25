@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "sideEffects":false,
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.common.js",
     "dev": "cross-env NODE_ENV=development webpack serve --config ./config/webpack.common.js",

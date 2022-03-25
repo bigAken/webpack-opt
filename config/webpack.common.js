@@ -10,7 +10,7 @@ const pathResolve = require("./paths");
 
 const common = {
   entry: {
-    index: "./src/index.tsx",
+    index: "./src/index.js",
   },
   output: {
     filename: "js/[name].[contenthash:6].bundle.js",
@@ -56,6 +56,9 @@ const common = {
         // loader: 'style-loader',
         // usage 3
         // loader: ["style-loader", "css-loader"]
+        
+        // css tree shaking
+        sideEffects: true,
       },
       {
         test: /\.less$/,
@@ -75,6 +78,8 @@ const common = {
           "postcss-loader",
           "less-loader",
         ],
+        // css tree shaking
+        sideEffects: true,
       },
       {
         test: /\.(png|jpg|gif|png|jpeg|svg)$/i,
