@@ -1,30 +1,22 @@
 const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { DefinePlugin } = require("webpack");
-const webpack = require("webpack");
-const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const { merge } = require("webpack-merge");
+const devConfig = require("./webpack.dev.js");
+const prodConfig = require("./webpack.prod.js");
+const pathResolve = require("./paths");
 
-module.exports = {
-  mode: "development",
+const common = {
   entry: {
     index: "./src/index.tsx",
   },
   output: {
     filename: "[name].bundle.js",
     // build file output dir ,The output directory as an absolute path.
-    path: path.resolve(__dirname, "build"),
+    path: pathResolve("./build"),
     assetModuleFilename: "static/[hash][ext][query]",
     // <script defer src="publicPath+'/index.bundle.js'"></script>
-    publicPath: "/",
-  },
-  // development mode recommand source-map or cheap-module-source-map
-  // product mode recommand false
-  devtool: "source-map",
-  devServer: {
-    hot: false,
-    // devServer Enable gzip compression for everything served
-    compress: true,
+    // publicPath: "./",
   },
   module: {
     rules: [
@@ -100,30 +92,30 @@ module.exports = {
     ],
   },
   plugins: [
-    // clean build dir
-    new CleanWebpackPlugin(),
     // index.html template in prodcut mode will compress html  template
     new HtmlWebpackPlugin({
       title: "webpack",
-      template: "./public/index.html",
-      favicon: "./public/favicon.ico",
+      template: pathResolve("./public/index.html"),
+      favicon: pathResolve("./public/favicon.ico"),
     }),
     // define global variable
     new DefinePlugin({
       BASE_URL: "'./'",
     }),
-    // react HMR
-    new ReactRefreshWebpackPlugin(),
-    // html HMR
-    new webpack.HotModuleReplacementPlugin(),
   ],
   // These options change how modules are resolved
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
-      asset: path.resolve(__dirname, "./src/asset"),
+      "@": pathResolve("./src"),
+      "@asset": pathResolve("./src/asset"),
     },
     // Attempt to resolve these extensions in order
     extensions: [".js", ".json", ".tsx", "ts"],
   },
+};
+
+module.exports = (env) => {
+  console.log("env", env);
+  const config = process.env.NODE_ENV === "production" ? prodConfig : devConfig;
+  return merge(common, config);
 };

@@ -26,6 +26,7 @@ module.exports = {
     // ],
 
     // react HMR plugin
-    require.resolve('react-refresh/babel')
-  ],
+    process.env.NODE_ENV === "development" &&
+      require.resolve("react-refresh/babel"),
+  ].filter(Boolean),
 };
