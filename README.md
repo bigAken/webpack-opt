@@ -73,6 +73,11 @@ production 模式下默认开启
    > 副作用比如在某个模块里面给 window 赋值了`window.abc = 'abc'`，但是这个模块的代码又被 treeshaking 删除了，在别的模块调用`window.abc`则会报`undefined`，所以这个模块有副作用
 3. css tree-shaking 可以在 rule 里面配置 sideEffects:true
 
+   > 本质还是通过 import 来做 tree shaking
+
+4. css tree shaking PureCss
+   purgecss-webpack-plugin
+
 ## 概览
 
 ![webpack](./webpack1.jpg)

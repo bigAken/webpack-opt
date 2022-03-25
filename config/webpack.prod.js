@@ -2,14 +2,28 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const PurgeWebpackCSSPlugin = require("purgecss-webpack-plugin");
+const path = require("path");
+const glob = require("glob");
+const PATHS = {
+  src: path.join(__dirname, "src"),
+};
 
 module.exports = {
   mode: "production",
   plugins: [
     // clean build dir
     new CleanWebpackPlugin(),
+    // css 抽离
     new MiniCssExtractPlugin({
       filename: "css/[name]-[contenthash:6].css",
+    }),
+    // css tree shaking
+    new PurgeWebpackCSSPlugin({
+      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+      safelist: function () {
+        return ["body", "html"];
+      },
     }),
   ],
   externals: {

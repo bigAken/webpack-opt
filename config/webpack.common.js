@@ -52,11 +52,6 @@ const common = {
           },
           { loader: "postcss-loader" },
         ],
-        // usage 2
-        // loader: 'style-loader',
-        // usage 3
-        // loader: ["style-loader", "css-loader"]
-        
         // css tree shaking
         sideEffects: true,
       },
