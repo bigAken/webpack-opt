@@ -1,6 +1,7 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -21,12 +22,15 @@ module.exports = {
     // [ˈmɪnɪmaɪz]
     minimize: true,
     minimizer: [
+      // js 压缩
       new TerserPlugin({
         test: /\.js(\?.*)?$/i,
         terserOptions: {
           compress: true,
         },
       }),
+      // css 压缩
+      new CssMinimizerPlugin(),
     ],
 
     splitChunks: {

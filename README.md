@@ -50,12 +50,16 @@ MiniCssExtractPlugin,支持 webpack 4.x 以上
 
 DLL 全程是动态链接库（Dynamic Link Library），是为软件在 Windows 中实现共享函数库的一种实现方式；那么 webpack 中也有内置 DLL 的功能，它指的是我们可以将可以共享，并且不经常改变的代码，抽取成一个共享的库；这个库在编译之后会被引入到其他项目的代码中,不需要重新编译。
 
-## terser 代码压缩
+## terser js 代码压缩
 
 早期我们会使用 uglify-js 来压缩、丑化我们的 JavaScript 代码，但是目前已经不再维护，并且不支持 ES6+的
 语法；Terser 是从 uglify-es fork 过来的，并且保留它原来的大部分 API 以及适配 uglify-es 和 uglify-js@3 等；也就是说，Terser 可以帮助我们压缩、丑化我们的代码，让我们的 bundle 变得更小。
 
 `terser-webpack-plugin`
+
+## css 压缩
+
+css-minimizer-webpack-plugin 插件使用 cssnano 优化和压缩 CSS
 
 ## tree shaking
 
