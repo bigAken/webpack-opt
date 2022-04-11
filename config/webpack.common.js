@@ -10,7 +10,7 @@ const pathResolve = require("./paths");
 
 const common = {
   entry: {
-    index: "./src/index.js",
+    index: "./src/index.tsx",
   },
   output: {
     filename: "js/[name].[contenthash:6].bundle.js",
@@ -33,6 +33,7 @@ const common = {
         // usage 1
         use: [
           {
+            // css 抽离
             loader:
               process.env.NODE_ENV === "production"
                 ? MiniCssExtractPlugin.loader
@@ -59,6 +60,7 @@ const common = {
         test: /\.less$/,
         use: [
           {
+            // css 抽离
             loader:
               process.env.NODE_ENV === "production"
                 ? MiniCssExtractPlugin.loader
@@ -109,13 +111,24 @@ const common = {
     ],
   },
   plugins: [
-    // index.html template in prodcut mode will compress html  template
+    // index.html template
+    // in prodcut mode will compress html  template
     new HtmlWebpackPlugin({
       title: "webpack",
       env: process.env.NODE_ENV,
       template: pathResolve("./public/index.html"),
       favicon: pathResolve("./public/favicon.ico"),
+      cache: true, // 两次打包一样则使用缓存
+      minify:
+        process.env.NODE_ENV == "production"
+          ? {
+              removeComments: true,
+              removeEmptyAttributes: true.valueOf,
+              removeEmptyAttributes: true,
+            }
+          : false,
     }),
+
     // define global variable
     new DefinePlugin({
       BASE_URL: "'./'",
@@ -133,7 +146,6 @@ const common = {
 };
 
 module.exports = (env) => {
-  console.log("env", env);
   const config = process.env.NODE_ENV === "production" ? prodConfig : devConfig;
   return merge(common, config);
 };

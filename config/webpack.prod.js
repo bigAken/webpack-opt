@@ -3,6 +3,7 @@ const TerserWebpackPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const PurgeWebpackCSSPlugin = require("purgecss-webpack-plugin");
+const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const path = require("path");
 const glob = require("glob");
 const PATHS = {
@@ -24,6 +25,11 @@ module.exports = {
       safelist: function () {
         return ["body", "html"];
       },
+    }),
+    // http gzip压缩
+    new CompressionWebpackPlugin({
+      test: /\.(css|js)/,
+      algorithm: "gzip",
     }),
   ],
   externals: {
@@ -63,7 +69,7 @@ module.exports = {
         "react-dom": {
           test: /[\\/]node_modules[\\/]react-dom[\\/]/,
           filename: "js/[name].[contenthash:6].chunk.js",
-          priority: 0,
+          priority: 10,
           reuseExistingChunk: true,
         },
         default: {
@@ -76,7 +82,7 @@ module.exports = {
     // 各个模块之间的引用和加载的逻辑相关的代码
     runtimeChunk: {
       name: function (entrypoint) {
-        return `inlineSource-${entrypoint.name}`;
+        return `runtime.${entrypoint.name}`;
       },
     },
   },
